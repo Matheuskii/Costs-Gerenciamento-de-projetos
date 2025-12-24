@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from './components/pages/Home';
+import Company from './components/pages/Company';
+import Contact from './components/pages/Contact';
+import NewProject from './components/pages/NewProject';
+import Container from './components/layout/Container';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        {/* Navigation Links */}
+        <ul>
+          <li>
+            <Link to='/'>Home</Link>
+          </li>
+          <li>
+            <Link to='/contact'>Contato</Link>
+          </li>
+          <li>
+            <Link to='/company'>Empresa</Link>
+          </li>
+          <li>
+            <Link to='/newproject'>Novo Projeto</Link>
+          </li>
+        </ul>
+      </div>
+
+      {/* Main Content Area */}
+      <Container>
+        {/* Routes configuration */}
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/company' element={<Company />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/newproject' element={<NewProject />} />
+        </Routes>
+      </Container>
+    </Router>
   );
 }
 
