@@ -1,0 +1,48 @@
+.company_content {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.section {
+    padding: 1.5em;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border-left: 4px solid #ffbb33;
+}
+
+.section h2 {
+    color: #222;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+.section p {
+    color: #666;
+    line-height: 1.8;
+    font-size: 1em;
+}
+
+.values_list,
+.features_list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.values_list li,
+.features_list li {
+    padding: 0.8em 0;
+    color: #555;
+    line-height: 1.6;
+    font-size: 1em;
+}
+
+.values_list li strong {
+    color: #222;
+}
+
+.features_list li {
+    color: #4CAF50;
+    font-weight: 600;
+}

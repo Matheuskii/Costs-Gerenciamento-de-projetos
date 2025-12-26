@@ -1,0 +1,22 @@
+.page_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  padding: 2em 0;
+}
+
+.page_container h1 {
+  color: #222;
+  margin-bottom: 0.5em;
+}
+
+.page_container p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.content {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+}

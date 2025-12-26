@@ -1,71 +1,224 @@
-# Getting Started with Create React App
+# 💰 Cost Manager
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Um sistema de gerenciamento de projetos e orçamentos desenvolvido com React + Node.js + MariaDB.
 
-## Available Scripts
+## 📋 Características
 
-In the project directory, you can run:
+- ✅ Gerenciamento completo de projetos
+- ✅ Controle de orçamentos por projeto
+- ✅ Categorização de projetos
+- ✅ Interface moderna e responsiva
+- ✅ API RESTful
+- ✅ Banco de dados com MariaDB
 
-### `npm start`
+## 🛠️ Tecnologias
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Frontend
+- **React 18** - Biblioteca JavaScript para UI
+- **React Router v6** - Navegação entre páginas
+- **CSS Modules** - Estilos isolados por componente
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend
+- **Node.js** - Runtime JavaScript
+- **Express** - Framework web
+- **MariaDB** - Banco de dados relacional
 
-### `npm test`
+## 📁 Estrutura do Projeto
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+costst/
+├── public/                 # Arquivos estáticos
+│   ├── index.html         # Página HTML principal
+│   └── favicon.ico        # Ícone do site
+├── src/                   # Código fonte React
+│   ├── components/
+│   │   ├── form/          # Componentes de formulário
+│   │   │   ├── Input.jsx
+│   │   │   ├── Select.jsx
+│   │   │   └── SubmitButton.jsx
+│   │   ├── layout/        # Componentes de layout
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Loading.jsx
+│   │   │   ├── EmptyState.jsx
+│   │   │   ├── PageInfo.jsx
+│   │   │   └── Container.jsx
+│   │   ├── pages/         # Páginas da aplicação
+│   │   │   ├── Home.jsx
+│   │   │   ├── Projects.jsx
+│   │   │   ├── NewProject.jsx
+│   │   │   ├── EditProject.jsx
+│   │   │   ├── Company.jsx
+│   │   │   └── Contact.jsx
+│   │   └── project/       # Componentes específicos
+│   │       └── ProjectForm.jsx
+│   ├── img/               # Imagens e ícones
+│   ├── App.js             # Componente raiz
+│   ├── index.js           # Ponto de entrada
+│   └── index.css          # Estilos globais
+├── database.sql           # Schema do banco de dados
+├── db.js                  # Conexão com MariaDB
+├── server.js              # Servidor Express
+└── package.json           # Dependências do projeto
+```
 
-### `npm run build`
+## 🚀 Instalação
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Configurar o Banco de Dados
+Execute o arquivo `database.sql` no MariaDB:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+mariadb < database.sql
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Ou importe manualmente no seu cliente MariaDB.
 
-### `npm run eject`
+### 2. Instalar Dependências
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 3. Iniciar o Servidor Backend
+```bash
+node server.js
+```
+O servidor rodará em `http://localhost:5000`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 4. Iniciar o Frontend (novo terminal)
+```bash
+npm start
+```
+A aplicação abrirá em `http://localhost:3000`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 📊 Banco de Dados
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Tabelas Principais
 
-## Learn More
+#### `categories`
+```sql
+id           INT PRIMARY KEY AUTO_INCREMENT
+category_name VARCHAR(100) NOT NULL
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### `projects`
+```sql
+id           INT PRIMARY KEY AUTO_INCREMENT
+project_name VARCHAR(100) NOT NULL
+budget       DECIMAL(10, 2) NOT NULL
+category_id  INT NOT NULL (FK para categories.id)
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔌 API Endpoints
 
-### Code Splitting
+### Categorias
+- `GET /categories` - Listar todas as categorias
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Projetos
+- `GET /projects` - Listar todos os projetos
+- `GET /projects/:id` - Obter projeto por ID
+- `POST /projects` - Criar novo projeto
+  - Body: `{ project_name, budget, category_id }`
+- `PUT /projects/:id` - Atualizar projeto
+  - Body: `{ project_name, budget, category_id }`
+- `DELETE /projects/:id` - Deletar projeto
 
-### Analyzing the Bundle Size
+## 🎨 Componentes Principais
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Form Components
+- **Input** - Campo de entrada com validação (texto, moeda)
+- **Select** - Dropdown para seleção de categorias
+- **SubmitButton** - Botão de envio de formulário
 
-### Making a Progressive Web App
+### Layout Components
+- **Navbar** - Barra de navegação superior
+- **Footer** - Rodapé da aplicação
+- **Container** - Contenedor responsivo
+- **Loading** - Indicador de carregamento
+- **EmptyState** - Estado vazio com mensagem
+- **PageInfo** - Layout genérico de página
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Pages
+- **Home** - Página inicial
+- **Projects** - Lista de projetos em grid
+- **NewProject** - Criar novo projeto
+- **EditProject** - Editar projeto existente
+- **Company** - Informações da empresa
+- **Contact** - Página de contato
 
-### Advanced Configuration
+## ✨ Funcionalidades Principais
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Gerenciamento de Projetos
+- Criar novos projetos com nome e orçamento
+- Visualizar todos os projetos em grid de 3 colunas
+- Editar projetos existentes
+- Deletar projetos (com confirmação)
+- Categorizar projetos
 
-### Deployment
+### Validações
+- Nome do projeto: mínimo 3 caracteres
+- Orçamento: deve ser maior que 0
+- Categoria: obrigatória
+- Campos de texto: sem números/caracteres especiais
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### UX/UI
+- Loading screens com spinner animado
+- Empty states informativos
+- Navegação fluida entre páginas
+- Design responsivo com CSS Modules
+- Efeitos hover e animações suaves
+- Cores e design moderno
 
-### `npm run build` fails to minify
+## 🔧 Configuração
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-"# Costs-Gerenciamento-de-projetos" 
+### Variáveis de Ambiente
+Você pode configurar no arquivo `db.js`:
+```javascript
+const conexao = mysql.createConnection({
+  host: 'localhost',
+  user: 'seu_usuario',
+  password: 'sua_senha',
+  database: 'seu_banco'
+})
+```
+
+## 📝 Como Usar
+
+### Criar um Projeto
+1. Clique em "Novo Projeto"
+2. Preencha o nome (mín. 3 caracteres)
+3. Defina o orçamento (maior que 0)
+4. Selecione uma categoria
+5. Clique em "Criar Projeto"
+
+### Editar um Projeto
+1. Vá para "Projetos"
+2. Clique no botão "Editar" do projeto
+3. Modifique os campos desejados
+4. Clique em "Editar Projeto"
+
+### Deletar um Projeto
+1. Vá para "Projetos"
+2. Clique no botão "Deletar"
+3. Confirme a exclusão
+
+## 🎯 Próximos Passos (Possíveis Melhorias)
+
+- [ ] Adicionar autenticação de usuários
+- [ ] Histórico de alterações nos projetos
+- [ ] Relatórios e gráficos de orçamento
+- [ ] Filtros avançados nos projetos
+- [ ] Dark mode
+- [ ] Exportar dados em PDF/Excel
+- [ ] Notificações por email
+
+## 📄 Licença
+
+Este projeto é de uso livre.
+
+## 👨‍💻 Autor
+
+Desenvolvido com ❤️
+
+---
+
+**Última atualização:** Dezembro de 2025 

@@ -5,9 +5,10 @@ import Select from '../form/Select'
 import SubmitButton from '../form/SubmitButton'
 import styles from './ProjectForm.module.css'
 
-function ProjectForm( {btnText}) {
+function ProjectForm( {handleSubmit, btnText, projectData} ) {
 
     const [categories, setCategories] = useState([])
+    const [project, setProject] = useState(projectData || {})
 
     useEffect(() =>{
         fetch("http://localhost:5000/categories", {
@@ -22,22 +23,64 @@ function ProjectForm( {btnText}) {
     })
     .catch((err) => console.log(err))
     }, [])
+
+    const submit = (e) => {
+        e.preventDefault()
+        
+        // Validações básicas
+        if (!project.project_name || project.project_name.trim().length < 3) {
+            alert('Nome do projeto deve ter pelo menos 3 caracteres')
+            return
+        }
+        
+        if (!project.budget || parseFloat(project.budget) <= 0) {
+            alert('Orçamento deve ser maior que 0')
+            return
+        }
+        
+        if (!project.category) {
+            alert('Selecione uma categoria')
+            return
+        }
+
+        handleSubmit(project)
+    }
+
+    function handleChange(e){
+        setProject({ ...project, [e.target.name]: e.target.value})
+        console.log(project)
+    }
+
+    function handleCategory(e){
+        setProject({
+            ...project, category: {
+                id: e.target.value,
+                category_name: e.target.options[e.target.selectedIndex].text,
+            },
+        })
+        console.log(project)
+            }
     return (
-        <form className={styles.form}>
+        <form onSubmit={submit} className={styles.form}>
             <Input 
             type="text" 
             text="Nome do projeto" 
-            name='name' 
+            nome='project_name' 
             placeholder="Insira o nome do projeto"
+            handleOnChange={handleChange}
+            value={project.project_name || ''}
             />
 
           <Input 
           type="number" 
           text="Orçamento do projeto" 
-          name='budget' 
-          placeholder="Insira o orçamento total"
+          nome='budget' 
+          placeholder="0.00"
+          handleOnChange={handleChange}
+          value={project.budget || ''}
+          isCurrency={true}
           />
-           <Select name='category_id' text='Selecione a categoria' options={categories}/>
+           <Select name='category_id' text='Selecione a categoria' options={categories} handleOnChange={handleCategory} value={project.category ? project.category.id : ''}/>
            <SubmitButton text={btnText}/>
         </form>
     )
