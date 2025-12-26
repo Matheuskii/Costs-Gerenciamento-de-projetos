@@ -1,0 +1,27 @@
+.edit_container {
+    max-width: 600px;
+    margin: 2em 0;
+}
+
+.edit_header {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 2em;
+}
+
+.back_link {
+    color: #ffbb33;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.back_link:hover {
+    color: #ffa500;
+}
+
+.edit_header h1 {
+    color: #222;
+    margin: 0;
+}

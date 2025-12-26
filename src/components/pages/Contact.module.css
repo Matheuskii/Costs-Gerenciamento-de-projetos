@@ -1,0 +1,118 @@
+.contact_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3em;
+    margin-top: 2em;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact_info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.info_section {
+    padding: 1.5em;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border-left: 4px solid #ffbb33;
+}
+
+.info_section h3 {
+    color: #222;
+    margin: 0 0 0.8em 0;
+    font-size: 1.2em;
+}
+
+.info_section p {
+    margin: 0.5em 0;
+    color: #666;
+}
+
+.info_section a {
+    color: #ffbb33;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.info_section a:hover {
+    text-decoration: underline;
+}
+
+.small_text {
+    font-size: 0.9em;
+    color: #999;
+    font-style: italic;
+}
+
+.contact_form {
+    padding: 2em;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    width: 100%;
+    height: fit-content;
+    top: 0;
+}
+   
+
+.contact_form h3 {
+    color: #222;
+    margin-top: 0;
+    margin-bottom: 1.5em;
+}
+
+.form_group {
+    margin-bottom: 1.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_group label {
+    margin-bottom: 0.5em;
+    font-weight: 600;
+    color: #222;
+}
+
+.form_group input,
+.form_group textarea {
+    padding: 0.8em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.form_group input:focus,
+.form_group textarea:focus {
+    outline: none;
+    border-color: #ffbb33;
+    box-shadow: 0 0 0 3px rgba(255, 187, 51, 0.1);
+}
+
+.submit_btn {
+    padding: 0.9em 2em;
+    background-color: #ffbb33;
+    color: #222;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.submit_btn:hover {
+    background-color: #ffa500;
+}
+
+@media (max-width: 768px) {
+    .contact_container {
+        grid-template-columns: 1fr;
+    }
+}

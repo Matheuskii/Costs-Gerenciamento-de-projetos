@@ -6,17 +6,17 @@ import style from "./Navbar.module.css";
 import logo from "../../img/costs_logo.png";
 function Navbar() {
   return (
-    <nav class={style.navbar}>
+    <nav className={style.navbar}>
       <Container>
         <Link to="/">
           <img src={logo} alt="Costs" />
         </Link>
         <ul className={style.list}>
-          <li class={style.item}>
+          <li className={style.item}>
             <Link to="/">Home</Link>
           </li>
           <li className={style.item}>
-            <Link to="/projetos">Meus Projetos</Link>
+            <Link to="/projects">Meus Projetos</Link>
           </li>
           
           <li className={style.item}>

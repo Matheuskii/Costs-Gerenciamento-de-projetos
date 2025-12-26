@@ -8,7 +8,7 @@ function Select({ text, name, options, handleOnChange, value }) {
         name={name} 
         id={name} 
         onChange={handleOnChange} 
-        value={value}
+        value={value || ''}
       >
         <option>Selecione uma opção</option>
         {options &&
@@ -17,7 +17,7 @@ function Select({ text, name, options, handleOnChange, value }) {
             // console.log(option); 
             return (
               <option value={option.id} key={option.id}>
-                {option.Nome}
+                {option.category_name || option.Nome} 
               </option>
             );
           })}
