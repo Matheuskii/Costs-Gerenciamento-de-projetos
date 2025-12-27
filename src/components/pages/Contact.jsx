@@ -1,10 +1,11 @@
+import { toast } from 'react-toastify'
 import PageInfo from '../layout/PageInfo'
 import styles from './Contact.module.css'
 
 function Contact() {
     const handleSubmit = (e) => {
         e.preventDefault()
-        alert('Mensagem enviada com sucesso!')
+        toast.success('Mensagem enviada com sucesso!')
         e.target.reset()
     }
 

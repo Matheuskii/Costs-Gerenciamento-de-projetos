@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from './components/pages/Home';
 import Company from './components/pages/Company';
 import Contact from './components/pages/Contact';
@@ -13,7 +15,7 @@ import Projects from './components/pages/Projects';
 function App() {
   return (
     <Router>
-      <Navbar/>
+      <Navbar />
 
       {/* Main Content Area */}
       <Container>
@@ -28,7 +30,12 @@ function App() {
 
         </Routes>
       </Container>
-      <Footer/>
+      <Footer />
+      <ToastContainer autoClose={3000} position="top-right"
+        toastStyle={{ backgroundColor: "#222", color: "#ffbb33" }}
+        progressStyle={{ backgroundColor: "#ffbb33" }}
+        theme="dark"
+      />
     </Router>
   );
 }

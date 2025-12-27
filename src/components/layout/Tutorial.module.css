@@ -1,0 +1,42 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: #fff;
+    padding: 3em;
+    border-radius: 10px;
+    width: 450px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 187, 51, 0.3);
+}
+
+.icon { font-size: 4em; display: block; margin-bottom: 0.5em; }
+
+.btn_next, .btn_finish {
+    background-color: #ffbb33;
+    border: none;
+    padding: 0.8em 2em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 2em;
+}
+
+.dot { width: 10px; height: 10px; background: #ccc; border-radius: 50%; }
+.dot.active { background: #ffbb33; width: 25px; border-radius: 10px; }
