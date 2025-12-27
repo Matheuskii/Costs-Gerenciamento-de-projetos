@@ -82,4 +82,46 @@ app.delete('/projects/:id', async (req, res) => {
     }
 })
 
+
+
+app.get('/projects/:id/services', async (req, res) => {
+    const [rows] = await db.execute('SELECT * FROM services WHERE project_id = ?', [req.params.id]);
+    res.json(rows);
+});
+
+app.post('/projects/:id/services', async (req, res) => {
+    const { name, cost, description } = req.body;
+    const projectId = req.params.id;
+
+    try {
+        await db.execute(
+            'INSERT INTO services (service_name, cost, description, project_id) VALUES (?, ?, ?, ?)',
+            [name, cost, description, projectId]
+        );
+
+        await db.execute(
+            'UPDATE projects SET cost = cost + ? WHERE id = ?',
+            [cost, projectId]
+        );
+
+        res.json({ message: "Serviço adicionado com sucesso!" });
+    } catch (error) {
+        res.status(500).json({ error: "Erro ao processar serviço" });
+    }
+});
+
+
+app.delete('/services/:id', async (req, res) => {
+    const { id } = req.params;
+    const { cost, project_id } = req.body; 
+
+    try {
+        await db.execute('DELETE FROM services WHERE id = ?', [id]);
+        await db.execute('UPDATE projects SET cost = cost - ? WHERE id = ?', [cost, project_id]);
+        res.json({ ok: true });
+    } catch (error) {
+        res.status(500).json({ error: "Erro ao deletar serviço" });
+    }
+});
+
 app.listen(5000, () => console.log('Servidor porta 5000'))

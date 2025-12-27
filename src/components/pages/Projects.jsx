@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import styles from './Projects.module.css'
+import Swal from 'sweetalert2' // Importação corrigida aqui
+import styles from './Projects.module.css' // Barra removida aqui
 import Loading from '../layout/Loading'
 import EmptyState from '../layout/EmptyState'
 
@@ -19,29 +20,55 @@ function Projects() {
             })
             .catch(err => {
                 console.log(err)
-                setTimeout(() => {
-                    setLoading(false)
-                }, 1000)
+                setLoading(false)
             })
     }, [])
 
     function removeProject(id) {
-        if(window.confirm('Tem certeza que deseja deletar este projeto?')) {
-            fetch(`http://localhost:5000/projects/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(resp => resp.json())
-            .then(() => {
-                setProjects(projects.filter(project => project.id !== id))
-            })
-            .catch(err => console.log(err))
-        }
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: "Você não poderá reverter esta ação!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ffbb33',
+            cancelButtonColor: '#222',
+            confirmButtonText: 'Sim, deletar!',
+            cancelButtonText: 'Cancelar',
+            background: '#efefef'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/projects/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                .then(() => {
+                    setProjects(projects.filter(project => project.id !== id));
+                    
+                    Swal.fire(
+                        'Deletado!',
+                        'Seu projeto foi removido com sucesso.',
+                        'success'
+                    );
+                })
+                .catch(err => {
+                    Swal.fire('Erro!', 'Não foi possível deletar o projeto.', 'error');
+                });
+            }
+        });
     }
 
-    if(loading) return <Loading />
+    if (loading) {
+        return (
+            <div style={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                alignItems: 'center', 
+                height: '70vh'
+            }}>
+                <Loading />
+            </div>
+        )}
+    
 
     return (
         <div>
@@ -52,7 +79,7 @@ function Projects() {
                 <EmptyState
                     icon="📋"
                     title="Nenhum projeto cadastrado"
-                    description="Comece criando seu primeiro projeto agora mesmo! Você poderá gerenciar orçamentos, categorias e muito mais."
+                    description="Comece criando seu primeiro projeto agora mesmo!"
                     buttonText="Criar Primeiro Projeto"
                     buttonLink="/newproject"
                     variant="info"

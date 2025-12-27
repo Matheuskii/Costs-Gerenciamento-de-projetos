@@ -25,3 +25,38 @@
     color: #222;
     margin: 0;
 }
+
+.btn {
+    background-color: #222;
+    color: #fff;
+    padding: 0.6em 1.2em;
+    text-decoration: none;
+    transition: 0.5s;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    color: #ffbb33;
+    background-color: #333;
+}
+
+.btn_close {
+    background-color: #8b0000; 
+}
+
+.btn_close:hover {
+    background-color: #ff4d4d;
+    color: #fff;
+}
+
+.service_section {
+    border-top: 1px solid #CCC;
+    margin-top: 2em;
+    padding-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}

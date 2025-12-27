@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import Input from '../form/Input'
 import Select from '../form/Select'
@@ -27,21 +28,25 @@ function ProjectForm( {handleSubmit, btnText, projectData} ) {
     const submit = (e) => {
         e.preventDefault()
         
-        // Validações básicas
         if (!project.project_name || project.project_name.trim().length < 3) {
-            alert('Nome do projeto deve ter pelo menos 3 caracteres')
+            toast.warning('Nome do projeto deve ter pelo menos 3 caracteres')
             return
         }
         
         if (!project.budget || parseFloat(project.budget) <= 0) {
-            alert('Orçamento deve ser maior que 0')
+            toast.warning('Orçamento deve ser maior que 0')
             return
         }
         
         if (!project.category) {
-            alert('Selecione uma categoria')
-            return
-        }
+    Swal.fire({
+        icon: 'info',
+        title: 'Ops...',
+        text: 'Por favor, selecione uma categoria!',
+        confirmButtonColor: '#ffbb33'
+    });
+    return;
+}
 
         handleSubmit(project)
     }
