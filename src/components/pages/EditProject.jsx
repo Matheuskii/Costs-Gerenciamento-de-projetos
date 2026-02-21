@@ -19,7 +19,7 @@ function EditProject() {
   const [showServiceForm, setShowServiceForm] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/projects/${id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/projects/${id}`)
       .then((resp) => {
         if (!resp.ok) {
           setNotFound(true);
@@ -31,7 +31,7 @@ function EditProject() {
       .then((data) => {
         if (data) {
           setProject(data);
-          return fetch(`http://localhost:5000/projects/${id}/services`);
+          return fetch(`${process.env.REACT_APP_API_URL}/projects/${id}/services`);
         }
       })
       .then((resp) => {
@@ -58,7 +58,7 @@ function EditProject() {
       return;
     }
 
-    fetch(`http://localhost:5000/projects/${id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/projects/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -83,7 +83,7 @@ function EditProject() {
       return;
     }
 
-    fetch(`http://localhost:5000/projects/${id}/services`, {
+    fetch(`${process.env.REACT_APP_API_URL}/projects/${id}/services`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(service),
@@ -107,7 +107,7 @@ function EditProject() {
         confirmButtonText: 'Sim, remover'
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`http://localhost:5000/services/${serviceId}`, {
+            fetch(`${process.env.REACT_APP_API_URL}/services/${serviceId}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ cost: cost, project_id: id })

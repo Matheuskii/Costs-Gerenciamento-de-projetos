@@ -10,7 +10,7 @@ function Projects() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch('http://localhost:5000/projects')
+        fetch(`${process.env.REACT_APP_API_URL}/projects`)
             .then(resp => resp.json())
             .then(data => {
                 setTimeout(() => {
@@ -37,7 +37,7 @@ function Projects() {
             background: '#efefef'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/projects/${id}`, {
+                fetch(`${process.env.REACT_APP_API_URL}/projects/${id}`, {
                     method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' }
                 })

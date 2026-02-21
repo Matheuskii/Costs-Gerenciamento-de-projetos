@@ -6,7 +6,7 @@ function NewProject(){
     const navigate = useNavigate()
 
     function createPost(project){
-        fetch("http://localhost:5000/projects", {
+        fetch(`${process.env.REACT_APP_API_URL}/projects`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

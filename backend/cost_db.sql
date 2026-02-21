@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Servidor:                     127.0.0.1
--- Versão do servidor:           12.0.2-MariaDB - mariadb.org binary distribution
+-- Versão do servidor:           12.1.2-MariaDB - MariaDB Server
 -- OS do Servidor:               Win64
 -- HeidiSQL Versão:              12.11.0.7065
 -- --------------------------------------------------------
@@ -24,9 +24,14 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela costs.categories: ~4 rows (aproximadamente)
+REPLACE INTO `categories` (`id`, `category_name`) VALUES
+	(4, 'Infra'),
+	(5, 'Desenvolvimento'),
+	(6, 'Design'),
+	(7, 'Planejamento');
 
 -- Copiando estrutura para tabela costs.projects
 CREATE TABLE IF NOT EXISTS `projects` (
@@ -40,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
   CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela costs.projects: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela costs.services
 CREATE TABLE IF NOT EXISTS `services` (
@@ -54,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `services` (
   CONSTRAINT `fk_project_service` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela costs.services: ~0 rows (aproximadamente)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
