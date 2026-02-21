@@ -2,9 +2,13 @@ import { db } from './db.js'
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
+const PORT = process.env.PORT || 5000;
+
 
 const app = express()
-app.use(cors({ origin: 'http://localhost:3000' }))
+app.use(cors({ 
+    origin: process.env.CLIENT_URL || 'http://localhost:3000' 
+}))
 app.use(bodyParser.json())
 
 app.get('/categories', async (req, res) => {
@@ -124,4 +128,4 @@ app.delete('/services/:id', async (req, res) => {
     }
 });
 
-app.listen(5000, () => console.log('Servidor porta 5000'))
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
